@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --panel-border: #334155;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --button: #2563eb;
+        --button-hover: #1d4ed8;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #020817, var(--bg));
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .card {
+        width: min(92vw, 440px);
+        background: rgba(17, 24, 39, 0.92);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 32px 24px;
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.35);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+      }
+
+      p {
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      button {
+        appearance: none;
+        border: 0;
+        border-radius: 12px;
+        background: var(--button);
+        color: white;
+        padding: 14px 28px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.15s ease;
+      }
+
+      button:hover {
+        background: var(--button-hover);
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Verification</h1>
+      <p>Press the button below to continue.</p>
+      <button id="verify" type="button">Verify</button>
+    </div>
+
+    <script>
+      document.title = '0';
+
+      const verifyBtn = document.getElementById('verify');
+
+      verifyBtn.addEventListener('click', () => {
+        const blankWindow = window.open('about:blank', '_blank');
+
+        if (blankWindow) {
+          blankWindow.focus();
+        }
+
+        setTimeout(() => {
+          try {
+            window.close();
+          } catch (err) {
+            window.location.href = 'about:blank';
+          }
+        }, 250);
+      });
+    </script>
+  </body>
+</html>
