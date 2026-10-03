@@ -70,35 +70,62 @@
       button:active {
         transform: translateY(0);
       }
+
+      .verified-message {
+        display: none;
+        text-align: center;
+      }
+
+      .verified-message h1 {
+        color: #10b981;
+      }
     </style>
   </head>
   <body>
     <div class="card">
-      <h1>Verification</h1>
-      <p>Press the button below to continue.</p>
-      <button id="verify" type="button">Verify</button>
+      <div class="verification-prompt">
+        <h1>Verification</h1>
+        <p>Press the button below to continue.</p>
+        <button id="verify" type="button">Verify</button>
+      </div>
+      <div class="verified-message">
+        <h1>✓ Verified</h1>
+        <p>You are verified on this tab.</p>
+      </div>
     </div>
 
     <script>
       document.title = '0';
 
       const verifyBtn = document.getElementById('verify');
+      const verificationPrompt = document.querySelector('.verification-prompt');
+      const verifiedMessage = document.querySelector('.verified-message');
 
-      verifyBtn.addEventListener('click', () => {
-        const blankWindow = window.open('about:blank', '_blank');
+      // Check if this is the about:blank tab
+      const isAboutBlank = window.location.href === 'about:blank';
 
-        if (blankWindow) {
-          blankWindow.focus();
-        }
+      if (isAboutBlank) {
+        // Show verified message on about:blank
+        verificationPrompt.style.display = 'none';
+        verifiedMessage.style.display = 'block';
+      } else {
+        // Show verification prompt on the main page
+        verifyBtn.addEventListener('click', () => {
+          const blankWindow = window.open('about:blank', '_blank');
 
-        setTimeout(() => {
-          try {
-            window.close();
-          } catch (err) {
-            window.location.href = 'about:blank';
+          if (blankWindow) {
+            blankWindow.focus();
           }
-        }, 250);
-      });
+
+          setTimeout(() => {
+            try {
+              window.close();
+            } catch (err) {
+              window.location.href = 'about:blank';
+            }
+          }, 250);
+        });
+      }
     </script>
   </body>
 </html>
